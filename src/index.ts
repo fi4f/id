@@ -6,7 +6,7 @@ export const VERSION = Version.new({
   moniker: "id",
   major  : 0,
   minor  : 1,
-  patch  : 1,
+  patch  : 2,
 })
 
 
@@ -67,29 +67,35 @@ const Table = {
 
 const __table__ = Table.new()
 
+function acquire<T>(what: T, id ?: string, use: Id.Table = __table__) {
+  return Table.acquire(use, what, id)
+}
+
+function request<T>(id: Id<T>, use: Id.Table = __table__) {
+  return Table.request(use, id)
+}
+
+function release<T>(id: Id<T>, use: Id.Table = __table__) {
+  return Table.release(use, id)
+}
+
+function   wrap<T>(what: T | Id<T>, use: Id.Table = __table__) {
+  return Table.wrap(use, what)
+}
+
+function unwrap<T>(what: T | Id<T>, use: Id.Table = __table__) {
+  return Table.unwrap(use, what)
+}
+
 export const Id = {
   __table__,
   Table,
 
-  acquire<T>(what: T, id ?: string, use: Id.Table = __table__) {
-    return Table.acquire(use, what, id)
-  },
-
-  request<T>(id: Id<T>, use: Id.Table = __table__) {
-    return Table.request(use, id)
-  },
-
-  release<T>(id: Id<T>, use: Id.Table = __table__) {
-    return Table.release(use, id)
-  },
-
-    wrap<T>(what: T | Id<T>, use: Id.Table = __table__) {
-    return Table.wrap(use, what)
-  },
-
-  unwrap<T>(what: T | Id<T>, use: Id.Table = __table__) {
-    return Table.unwrap(use, what)
-  },
+  acquire,
+  request,
+  release,
+    wrap,
+  unwrap,
 }
 
 export { Version } from "@fi4f/v"
