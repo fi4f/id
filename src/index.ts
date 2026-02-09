@@ -6,7 +6,7 @@ export const VERSION = Version.new({
   moniker: "id",
   major  : 0,
   minor  : 1,
-  patch  : 0,
+  patch  : 1,
 })
 
 
